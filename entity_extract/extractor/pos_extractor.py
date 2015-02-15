@@ -2,7 +2,7 @@
 # Aimed at Extracting Relationships
 from .sent_split import SentSplit
 
-Class PosExtractor(object):
+class PosExtractor(object):
 
     def __init__(self, debug = False):
         self.sentSplit = SentSplit()

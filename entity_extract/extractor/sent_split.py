@@ -2,7 +2,7 @@
 
 import nltk
 
-Class SentSplit(object):
+class SentSplit(object):
     
     def __init__(self):
         self.sent_tokenizer = nltk.data.load('tokenizers/punkt/english.pickle')
