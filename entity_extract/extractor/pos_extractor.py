@@ -21,5 +21,7 @@ class PosExtractor(object):
         sents = self._sentSplit.split(raw_corpus)
         for sent in sents:
             tokens = self._tokenizer.tokenize(sent)
-            yield self._pos_tagger.tag(tokens)
+            tags = self._pos_tagger.tag(tokens)
+
+            yield tags
         
