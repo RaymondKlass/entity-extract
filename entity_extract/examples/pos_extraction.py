@@ -2,7 +2,7 @@
 #from entity_extract.extractor.extractors import PosExtractor
 from entity_extract.extractor.utilities import SentSplit
 from entity_extract.extractor.utilities import Tokenizer
-from entity_extract.extractor.utilities import PosExtractor
+from entity_extract.extractor.extractors import PosExtractor
 from entity_extract.extractor.pos_tagger import PosTagger
 
 #p = PosExtractor()
