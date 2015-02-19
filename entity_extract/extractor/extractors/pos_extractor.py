@@ -8,5 +8,4 @@ class PosExtractor(object):
         
     # Generator to return tokenized sentences
     def extract_entities(self, token_sent):
-        pass
-        return
+        return True
