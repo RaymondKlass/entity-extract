@@ -9,7 +9,7 @@ sentSplitter = SentSplit()
 tokenizer = Tokenizer()
 tagger = PosTagger()
 
-#p = PosExtractor()
+
 sents = sentSplitter.split('This is a sentence about the pie in the sky.  If would be interesting.  If only there was')
 for sent in sents:
     tokens = tokenizer.tokenize(sent)
