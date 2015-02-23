@@ -30,6 +30,7 @@ class PosExtractor(object):
     def extract_entities(self, token_sent):
         grammer = r"""
             NP: {<DT|JJ|NN.*>+}
+            V: {<RB>?<MD|VB|VBD|VBP|VBG|VBN><RP|RB>?}
         """
         
         cp = nltk.RegexpParser(grammer)
