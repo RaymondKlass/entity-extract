@@ -8,4 +8,25 @@ class PosExtractor(object):
         
     # Generator to return tokenized sentences
     def extract_entities(self, token_sent):
+        # Use regex matching to identify relational phrases
+        # VP?
+        # V(W*P)?
+        # 
+        # V1: 'RB'
+        # V2: 'MD', 'VB', 'VBD', 'VBP', 'VBZ', 'VBG', 'VBN'
+        # V3: 'RP', 'RB'
+        # (V1)? + (V2) + (V3)?
+        #
+        # P1: 'RB'
+        # P2: 'IN', 'TO', 'RP'
+        # P3: 'RB'
+        # (P1)? + (P2) + (P3)?
+        #
+        # W: 'PRP$', 'CD', 'DT', 'JJ', 'JJS', 'JJR', 'NN', 'NNS', 'NNP', 'NNPS', 'POS', 'RB', 'RBR', 'RBS', 'VBN', 'VBG'
+        # (W1)
+        #
+        
+        
+        
+        
         return True
