@@ -32,7 +32,7 @@ class PosExtractor(object):
             NP: {<DT|JJ|NN.*>+}
             V: {<RB>?<MD|VB|VBD|VBP|VBG|VBN><RP|RB>?}
             P: {<RB>?<IN|TO|RP><RB>?}
-            W: {PRP$|CD|DT|JJ|JJS|JJR|NN|NNS|NNP|NNPS|POS|RB|RBR|RBS|VBN|VBG}
+            W: {<PRP$|CD|DT|JJ|JJS|JJR|NN|NNS|NNP|NNPS|POS|RB|RBR|RBS|VBN|VBG>}
         """
         
         cp = nltk.RegexpParser(grammer)
