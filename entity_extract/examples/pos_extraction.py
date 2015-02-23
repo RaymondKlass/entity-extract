@@ -10,6 +10,7 @@ sentSplitter = SentSplit()
 tokenizer = Tokenizer()
 tagger = PosTagger()
 chunker = ChunkParser()
+extractor = PosExtractor()
 
 
 sents = sentSplitter.split('This is a sentence about the pie in the sky.  If would be interesting.  If only there was')
@@ -18,3 +19,4 @@ for sent in sents:
     tags = tagger.tag(tokens)
     chunks = chunker.parse(tags)
     print chunks
+    print PosExtractor(tags)

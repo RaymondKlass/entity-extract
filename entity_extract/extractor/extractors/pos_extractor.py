@@ -26,9 +26,11 @@ class PosExtractor(object):
         
     # Generator to return tokenized sentences
     def extract_entities(self, token_sent):
+        grammer = r"""
+            NP: {<DT|JJ|NN.*>++}
+        """
+        
+        cp = nltk.RegexpParser(grammer)
+        
+        return cp.parse(token_sent)
 
-        
-        
-        
-        
-        return True
