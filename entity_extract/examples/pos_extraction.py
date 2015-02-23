@@ -19,4 +19,4 @@ for sent in sents:
     tags = tagger.tag(tokens)
     chunks = chunker.parse(tags)
     print chunks
-    print PosExtractor(tags)
+    print extractor.extract_entities(tags)
