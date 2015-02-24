@@ -13,7 +13,8 @@ chunker = ChunkParser()
 extractor = PosExtractor()
 
 
-sents = sentSplitter.split('This is a sentence about the pie in the sky.  If would be interesting.  If only there was')
+
+sents = sentSplitter.split('The big orange tiger ran across the green grass field.')
 for sent in sents:
     tokens = tokenizer.tokenize(sent)
     tags = tagger.tag(tokens)
