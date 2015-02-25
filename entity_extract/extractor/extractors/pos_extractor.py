@@ -34,6 +34,7 @@ class PosExtractor(object):
             W: {<PRP$|CD|DT|JJ|JJS|JJR|NN|NNS|NNP|NNPS|POS|RB|RBR|RBS|VBN|VBG>*}
             RelP1: {(<V><P>?)*}
             RelP2: {(<V>(<W>*<P>)?)*}
+            RelPhrase: {(<RelP1>*|<RelP2>*)?}
         """
         
         cp = nltk.RegexpParser(grammer)
