@@ -1,16 +1,15 @@
 
 #from entity_extract.extractor.extractors import PosExtractor
 from entity_extract.extractor.utilities import SentSplit, Tokenizer
-from entity_extract.extractor.extractors import PosExtractor
 from entity_extract.extractor.pos_tagger import PosTagger
-from entity_extract.extractor.parsers import ChunkParser
+from entity_extract.extractor.parsers import ChunkParser, RelationGrammerParser
 
 # Initialize Services
 sentSplitter = SentSplit()
 tokenizer = Tokenizer()
 tagger = PosTagger()
 chunker = ChunkParser()
-extractor = PosExtractor()
+grammerParse = RelationGrammerParser()
 
 
 
@@ -20,4 +19,4 @@ for sent in sents:
     tags = tagger.tag(tokens)
     chunks = chunker.parse(tags)
     print chunks
-    print extractor.extract_entities(tags)
+    print grammerParse.parse(tags)

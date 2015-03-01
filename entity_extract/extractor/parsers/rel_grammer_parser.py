@@ -11,9 +11,9 @@ class RelationGrammerParser(object):
             RelPhrase: {(<RelP1>*|<RelP2>*)?}
     """
     
-    def __init__(self, grammer = self.RelPhraseGrammer):
-        self.grammer = grammer
-        self.parser = nltk.RegexpParser(grammer)
+    def __init__(self, grammer = None):
+        self.grammer = grammer or self.RelPhraseGrammer
+        self.parser = nltk.RegexpParser(self.grammer)
     
     
     def parse(self, tokenized_sent):
