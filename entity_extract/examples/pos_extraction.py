@@ -13,7 +13,7 @@ grammerParse = RelationGrammerParser()
 
 
 
-sents = sentSplitter.split('The big orange tiger ran across the green grass field.')
+sents = sentSplitter.split('The big orange tiger ran across the green grass field.  Sean White won the Olympic Gold metal in snowboarding.')
 for sent in sents:
     tokens = tokenizer.tokenize(sent)
     tags = tagger.tag(tokens)
