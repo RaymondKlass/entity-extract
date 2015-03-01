@@ -2,16 +2,17 @@ import nltk
 
 class RelationGrammerParser(object):
     
-    def __init__(self):
-        grammer = r"""
+    RelPhraseGrammer = r"""
             V: {<RB>?<MD|VB|VBD|VBP|VBG|VBN><RP|RB>?}
             P: {<RB>?<IN|TO|RP><RB>?}
             W: {<PRP$|CD|DT|JJ|JJS|JJR|NN|NNS|NNP|NNPS|POS|RB|RBR|RBS|VBN|VBG>*}
             RelP1: {(<V><P>?)*}
             RelP2: {(<V>(<W>*<P>)?)*}
             RelPhrase: {(<RelP1>*|<RelP2>*)?}
-        """
-        
+    """
+    
+    def __init__(self, grammer = self.RelPhraseGrammer):
+        self.grammer = grammer
         self.parser = nltk.RegexpParser(grammer)
     
     
