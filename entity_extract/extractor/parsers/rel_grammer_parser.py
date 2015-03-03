@@ -26,9 +26,8 @@ class RelationGrammerParser(object):
     RelPhraseGrammer = r"""
             V: {<RB>?<MD|VB|VBD|VBP|VBG|VBN><RP|RB>?}
             P: {<RB>?<IN|TO|RP><RB>?}
-            W: {<PRP$|CD|DT|JJ|JJS|JJR|NN|NNS|NNP|NNPS|POS|RB|RBR|RBS|VBN|VBG>*}
             RelP1: {(<V><P>?)*}
-            RelP2: {(<V>(<W>*<P>)?)*}
+            RelP2: {(<V>((<PRP$|CD|DT|JJ|JJS|JJR|NN|NNS|NNP|NNPS|POS|RB|RBR|RBS|VBN|VBG>)*<P>)?)*}
             RelPhrase: {(<RelP1>*|<RelP2>*)?}
     """
     
