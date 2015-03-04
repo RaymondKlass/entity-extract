@@ -1,10 +1,11 @@
 import nltk
 from nltk.corpus import conll2000
-from nltk.chunk.util import conlltags2tree		
+from nltk.chunk.util import conlltags2tree
+from entity_extract.extractor.parsers.base_parser import BaseParser		
     
     
 
-class ChunkParser(nltk.ChunkParserI):
+class ChunkParser(nltk.ChunkParserI, BaseParser):
 
     def __init__(self, chunk_types=['NP'], train_sents=None):
         if not train_sents:
