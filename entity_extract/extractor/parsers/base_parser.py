@@ -1,3 +1,8 @@
+"""
+Base Class for Parsers - ensures that make shift parsers implement the
+same standard methods as NLTK parsers.
+"""
+
 class BaseParser(object):
     
     def __init__(self):
