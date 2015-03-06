@@ -11,3 +11,9 @@ class BaseParser(object):
     def parse(self, sentence):
         """Method to parse a sentence - required to be implemented """
         raise NotImplementedError("Parse method has not been implemented")
+        
+    def parseBoundaries(self, sentence):
+        """Method to parse a sentence and return the boundaries of a given 
+           tag type - such as relationalPhrases """
+    
+        pass
