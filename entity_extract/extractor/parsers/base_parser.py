@@ -11,8 +11,10 @@ class BaseParser(object):
     def parse(self, sentence):
         """Method to parse a sentence - required to be implemented """
         raise NotImplementedError("Parse method has not been implemented")
-        
-    def parseBoundaries(self, sentence):
+    
+    
+    # Needs to be updated to honor specific phrase types
+    def parseBoundaries(self, sentence, phrase_type = []):
         """Method to parse a sentence and return the boundaries of a given 
            tag type - such as relationalPhrases """
     
