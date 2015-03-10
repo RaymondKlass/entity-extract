@@ -17,6 +17,23 @@ class BaseParser(object):
     def parseBoundaries(self, sentence, phrase_type = []):
         """Method to parse a sentence and return the boundaries of a given 
            tag type - such as relationalPhrases """
+        raise NotImplementedError("Parse Boundary method has not been implemented")
+            
+
+
+""" 
+Base Class for Tree based parsers
+"""
+
+class BaseTreeParser(object):
+    
+    def __init__(self):
+        pass
+    
+    
+    def parseBoundaries(self, sentence, phrase_type = []):
+        """Method to parse a sentence and return the boundaries of a given 
+           tag type - such as relationalPhrases """
     
         parsed_sent = self.parse(sentence)
         cur_position = 0
