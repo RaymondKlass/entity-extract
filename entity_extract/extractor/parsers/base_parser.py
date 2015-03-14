@@ -45,7 +45,12 @@ class BaseTreeParser(object):
                 # print tag.node
                 tag.node
                 inc = self._count_leaves(tag)
-                bounds.append((cur_position, cur_position + inc,))
+                
+                # This approach will only work for top level parsed phrases - 
+                # Step 2 is to extend this for phrases of arbitrary depth.
+                
+                if tag.node in phrase_type:
+                    bounds.append((cur_position, cur_position + inc,))
             except AttributeError:
                 inc = 1
             
