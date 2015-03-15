@@ -1,3 +1,5 @@
+import types
+
 """
 Base Class for Parsers - ensures that make shift parsers implement the
 same standard methods as NLTK parsers.
@@ -34,10 +36,16 @@ class BaseTreeParser(object):
     def parseBoundaries(self, sentence, phrase_type = []):
         """Method to parse a sentence and return the boundaries of a given 
            tag type - such as relationalPhrases """
-    
+        
+        # Make sure that if a string is passed it is cast into an array
+        if isinstance(phrase_type, types.StringTypes):
+            phrase_type = [phrase_type]
+        
         parsed_sent = self.parse(sentence)
         cur_position = 0
         bounds = []
+        # Each Phrase Type specified will be an array of boundary pairs found.
+        boundsByTag = {p:[] for p in phrase_type}
         
         for i, tag in enumerate(parsed_sent):
             try:
@@ -51,12 +59,36 @@ class BaseTreeParser(object):
                 
                 if tag.node in phrase_type:
                     bounds.append((cur_position, cur_position + inc,))
+                    
+                ## Let's try a generalization of the parser extraction - for any tag type...
+                self._count_and_extract(cur_position, tag, boundsByTag, phrase_type)
+                
+                    
             except AttributeError:
                 inc = 1
             
             cur_position += inc
-        
+        print boundsByTag
         return bounds
+    
+    
+    
+    def _count_and_extract(self, cur_position, t, boundsByTag, phrase_type):
+        """ Recursively discover tags and append their bounds if in phrase_type"""
+        try:
+            t.node
+            cP = cur_position
+            for child in t:
+                cP += self._count_and_extract(cP, child, boundsByTag, phrase_type)
+                   
+            if t.node in phrase_type:
+                boundsByTag[t.node].append( (cur_position, cP,) )
+                
+            return cP - cur_position    
+        except AttributeError:
+            return 1
+    
+    
     
     def _count_leaves(self, t):
         try:

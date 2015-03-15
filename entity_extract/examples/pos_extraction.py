@@ -20,4 +20,4 @@ for sent in sents:
     #chunks = chunker.parse(tags)
     #print chunks
     print grammerParse.parse(tags)
-    print grammerParse.parseBoundaries(tags, 'RelPhrase')
+    print grammerParse.parseBoundaries(tags, ['RelPhrase', 'V', 'P', 'RelP1', 'RelP2'])
