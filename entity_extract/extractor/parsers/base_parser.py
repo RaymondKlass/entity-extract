@@ -37,7 +37,6 @@ class BaseTreeParser(object):
         """Method to parse a sentence and return the boundaries of a given 
            tag type - such as relationalPhrases """
         
-        # Make sure that if a string is passed it is cast into an array
         if isinstance(phrase_type, types.StringTypes):
             phrase_type = [phrase_type]
         
