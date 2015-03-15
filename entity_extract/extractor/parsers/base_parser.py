@@ -43,33 +43,18 @@ class BaseTreeParser(object):
         
         parsed_sent = self.parse(sentence)
         cur_position = 0
-        bounds = []
-        # Each Phrase Type specified will be an array of boundary pairs found.
         boundsByTag = {p:[] for p in phrase_type}
         
         for i, tag in enumerate(parsed_sent):
             try:
-                # Prints the label of the node ( - for this case - RelPhrase )
-                # print tag.node
                 tag.node
-                inc = self._count_leaves(tag)
-                
-                # This approach will only work for top level parsed phrases - 
-                # Step 2 is to extend this for phrases of arbitrary depth.
-                
-                if tag.node in phrase_type:
-                    bounds.append((cur_position, cur_position + inc,))
-                    
-                ## Let's try a generalization of the parser extraction - for any tag type...
-                self._count_and_extract(cur_position, tag, boundsByTag, phrase_type)
-                
-                    
+                inc = self._count_and_extract(cur_position, tag, boundsByTag, phrase_type)           
             except AttributeError:
                 inc = 1
             
             cur_position += inc
-        print boundsByTag
-        return bounds
+
+        return boundsByTag
     
     
     
@@ -85,14 +70,5 @@ class BaseTreeParser(object):
                 boundsByTag[t.node].append( (cur_position, cP,) )
                 
             return cP - cur_position    
-        except AttributeError:
-            return 1
-    
-    
-    
-    def _count_leaves(self, t):
-        try:
-            t.node
-            return sum([self._count_leaves(child) for child in t])
         except AttributeError:
             return 1
