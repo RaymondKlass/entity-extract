@@ -27,7 +27,7 @@ class BaseParser(object):
 Base Class for Tree based parsers
 """
 
-class BaseTreeParser(object):
+class BaseTreeParser(BaseParser):
     
     def __init__(self):
         pass

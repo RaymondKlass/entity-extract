@@ -8,6 +8,9 @@ setup(name="entity-extractor",
       description="Entity Extraction, Recognition, and Translation to RDF",
       license="MIT",
       packages=["entity_extractor"],
-      install_requires=["nltk"],
-      url:"https://github.com/RaymondKlass/entity-extract"
+      install_requires=[
+        "nltk", 
+        "mock >= 1.0.1"
+      ],
+      url="https://github.com/RaymondKlass/entity-extract"
       )

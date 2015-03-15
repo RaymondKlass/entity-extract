@@ -20,9 +20,9 @@
 #
 
 import nltk
-from entity_extract.extractor.parsers.base_parser import BaseParser, BaseTreeParser
+from entity_extract.extractor.parsers.base_parser import BaseTreeParser
 
-class RelationGrammerParser(BaseTreeParser, BaseParser):
+class RelationGrammerParser(BaseTreeParser):
     
     RelPhraseGrammer = r"""
             V: {<RB>?<MD|VB|VBD|VBP|VBG|VBN><RP|RB>?}

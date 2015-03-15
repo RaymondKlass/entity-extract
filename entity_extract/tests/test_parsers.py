@@ -1,18 +1,22 @@
 import unittest
+import mock
 from entity_extract.extractor.parsers import base_parser
 
 
 class base_tree_parser(unittest.TestCase):
     
     def setUp(self):
-        pass
+        self.base_tree = base_parser.BaseTreeParser
         
     def tearDown(self):
         pass
     
-    def test_parse_boundaries(self):
+    @mock.patch('entity_extract.extractor.parsers.base_parser.BaseTreeParser.parse')
+    def test_parse_boundaries(self, mock_parse):
         """ Test boundary parse method to see that phrase boundaries are properly
             recorded. 
-        """    
+        """
+        mock_parse.return_value = 'Hello'
+        print self.base_tree.parse('A new sentence')    
         self.assertTrue(True)
     
