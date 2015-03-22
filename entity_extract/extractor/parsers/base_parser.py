@@ -46,7 +46,7 @@ class BaseTreeParser(BaseParser):
         
         for i, tag in enumerate(parsed_sent):
             try:
-                tag.node
+                tag.label()
                 inc = self._count_and_extract(cur_position, tag, boundsByTag, phrase_type)           
             except AttributeError:
                 inc = 1
@@ -60,13 +60,13 @@ class BaseTreeParser(BaseParser):
     def _count_and_extract(self, cur_position, t, boundsByTag, phrase_type):
         """ Recursively discover tags and append their bounds if in phrase_type"""
         try:
-            t.node
+            t.label()
             cP = cur_position
             for child in t:
                 cP += self._count_and_extract(cP, child, boundsByTag, phrase_type)
                    
-            if t.node in phrase_type:
-                boundsByTag[t.node].append( (cur_position, cP,) )
+            if t.label() in phrase_type:
+                boundsByTag[t.label()].append( (cur_position, cP,) )
                 
             return cP - cur_position    
         except AttributeError:
