@@ -27,5 +27,5 @@ class base_tree_parser(unittest.TestCase):
         
         #print self.base_tree.parse('A new sentence')
         bounds = self.base_tree.parseBoundaries('The big orange tiger ran across.', ['RelPhrase','RelP1'])   
-        self.assertEqual(bounds['RelP1'], [(4,5)]) 
+        self.assertEqual(bounds['RelP1'], [(4,6)]) 
         self.assertTrue(True)
