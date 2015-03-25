@@ -9,7 +9,7 @@ class base_tree_parser(unittest.TestCase):
     
     def setUp(self):
         self.base_tree = base_parser.BaseTreeParser()
-        self.sent1 = "(S The/JJ big/JJ orange/NN tiger/NN (RelPhrase (RelP1 (V ran/VBD) (P across/IN))))"
+        self.sent1 = "(S The/JJ big/JJ orange/NN tiger/NN (RelPhrase (RelP1 (V ran/VBD) (P across/IN)) (RelP2 (V ran/VBD) (P across/IN) )) the/DT green/JJ grass/NN field/NN)"
         
     def tearDown(self):
         pass
@@ -26,5 +26,13 @@ class base_tree_parser(unittest.TestCase):
         mock_parse.return_value = Tree.fromstring(self.sent1)
         
         #print self.base_tree.parse('A new sentence')
-        bounds = self.base_tree.parseBoundaries('The big orange tiger ran across.', ['RelPhrase','RelP1'])   
-        self.assertEqual(bounds['RelP1'], [(4,6)]) 
+        bounds = self.base_tree.parseBoundaries(self.sent1, ['RelPhrase','RelP1', 'P'])   
+        self.assertEqual(bounds['RelP1'], [(4,6)])
+        self.assertEqual(bounds['RelPhrase'], [(4,8)])
+        self.assertEqual(bounds['P'], [(5,6), (7,8)])
+        
+        # Wihtout specifying a tag - all tags should be recorded.
+        bounds = self.base_tree.parseBoundaries(self.sent1)   
+        self.assertEqual(bounds['RelP1'], [(4,6)])
+        self.assertEqual(bounds['RelPhrase'], [(4,8)])
+        self.assertEqual(bounds['P'], [(5,6), (7,8)])
