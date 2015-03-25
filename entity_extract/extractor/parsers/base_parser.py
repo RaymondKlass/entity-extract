@@ -21,7 +21,11 @@ class BaseParser(object):
            tag type - such as relationalPhrases """
         raise NotImplementedError("Parse Boundary method has not been implemented")
             
-
+    
+    def collapseBoundaries(self, parseBundaries, phrases = []):
+        """Method to collapse parse bounds - of specific phrases - or all if none are specified """
+        raise NotImplementedError("Collapse Boundaries must be implemented")
+    
 
 """ 
 Base Class for Tree based parsers
