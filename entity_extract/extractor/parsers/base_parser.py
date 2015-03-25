@@ -69,9 +69,12 @@ class BaseTreeParser(BaseParser):
             for child in t:
                 cP += self._count_and_extract(cP, child, boundsByTag, phrase_type)
                    
-            if t.label() in phrase_type:
-                boundsByTag[t.label()].append( (cur_position, cP,) )
-                
+            if t.label() in phrase_type or not len(phrase_type):
+                try:
+                    boundsByTag[t.label()].append( (cur_position, cP,) )
+                except KeyError:
+                    boundsByTag[t.label()] = [(cur_position, cP,)]
+                    
             return cP - cur_position    
         except AttributeError:
             return 1
