@@ -21,10 +21,18 @@ class BaseParser(object):
            tag type - such as relationalPhrases """
         raise NotImplementedError("Parse Boundary method has not been implemented")
             
-    
-    def collapseBoundaries(self, parseBundaries, phrases = []):
+    # For the below to work - we'd need the parse Boundaries to populate a class attribute
+    def collapseBoundaries(self, phrase_type):
         """Method to collapse parse bounds - of specific phrases - or all if none are specified """
-        raise NotImplementedError("Collapse Boundaries must be implemented")
+        #raise NotImplementedError("Collapse Boundaries must be implemented")
+        returnBounds = {}
+        for phraseType in self.parseBoundaries.keys():
+            if not len(phrase_type) or phraseType in phrase_type:
+                returnBounds[phrase_type] = self._collapseBounds(phrase_type)
+                
+    def _collapseBounds(phrase_type):
+        sortedPhrases = sorted(self.parseBoundaries[phrase_type], key = lambda x : x[0])
+        print sortedPhrases
     
 
 """ 
@@ -56,7 +64,7 @@ class BaseTreeParser(BaseParser):
                 inc = 1
             
             cur_position += inc
-
+        
         return boundsByTag
     
     
