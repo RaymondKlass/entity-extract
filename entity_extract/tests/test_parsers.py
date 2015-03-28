@@ -21,8 +21,6 @@ class base_tree_parser(unittest.TestCase):
         """
         
         # We need to create a tree with which to test our parseBoundaries method
-        
-        
         mock_parse.return_value = Tree.fromstring(self.sent1)
         
         #print self.base_tree.parse('A new sentence')
@@ -31,8 +29,32 @@ class base_tree_parser(unittest.TestCase):
         self.assertEqual(bounds['RelPhrase'], [(4,8)])
         self.assertEqual(bounds['P'], [(5,6), (7,8)])
         
-        # Wihtout specifying a tag - all tags should be recorded.
+        # Without specifying a tag - all tags should be recorded.
         bounds = self.base_tree.parseBoundaries(self.sent1)   
         self.assertEqual(bounds['RelP1'], [(4,6)])
         self.assertEqual(bounds['RelPhrase'], [(4,8)])
         self.assertEqual(bounds['P'], [(5,6), (7,8)])
+        
+    
+    def test_collapse_boundaries(self):
+        """ Test boundary collapse method """
+        
+        bounds = {'P1' : [(1,3), (3,5), (6,7), (8,12), (9,11), (10, 10)],
+                  'P2' : [(1,3), (2,4), (100, 127)]}
+        
+        # Try while specifying a phrase type to collapse
+        cBounds = self.base_tree.collapseBoundaries(bounds, ['P1'])
+        
+        # Test that P1 was properly collapse
+        self.assertEqual(cBounds['P1'], [(1,5), (6,7), (8,12)])
+        # P2 should not have been collapsed - so it should the same as above
+        self.assertEqual(cBounds['P2'], [(1,3), (2,4), (100, 127)])
+        
+        # Try without specifying phrase type (should collapse all)
+        cBounds = self.base_tree.collapseBoundaries(bounds)
+        
+        # Test that P1 was properly collapse
+        self.assertEqual(cBounds['P1'], [(1,5), (6,7), (8,12)])
+        # P2 should nobe collapsed
+        self.assertEqual(cBounds['P2'], [(1,4), (100, 127)])
+        
