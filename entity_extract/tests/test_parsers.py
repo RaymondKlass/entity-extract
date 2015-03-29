@@ -83,5 +83,17 @@ class chunk_parser_tests(unittest.TestCase):
         # Test without specifying a phrase type
         bounds = self.chunkParser.parseBoundaries(self.rawSent)
         self.assertEqual(bounds, {'NP' : [(0,2), (3,7), (8,9)]})
+        
+    
+    def test_collapse_boundaries(self):
+        """ Test Boundary Collapse in Chunk Parser"""
+        
+        bounds = {'NP' : [(0,2), (3,7), (8,9)]}
+        cBounds = self.chunkParser.collapseBoundaries(bounds, 'NP')
+        self.assertEqual(bounds, cBounds)
+        
+        bounds = {'NP' : [(0,2), (2,7), (8,9)]}
+        cBounds = self.chunkParser.collapseBoundaries(bounds)
+        self.assertEqual(cBounds, {'NP' : [(0,7), (8,9)]})
     
     

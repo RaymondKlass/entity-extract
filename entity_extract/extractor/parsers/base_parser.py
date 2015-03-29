@@ -40,19 +40,20 @@ class BaseParser(object):
     def _collapseBounds(self, bounds):
         """Perform the bounds collapse - and return a new list, fully collapsed"""
         sortedPhrases = sorted(bounds, key = lambda x : x[0])
-        
+
         collapsedBounds = []
-        for boundPair in bounds:
+        for boundPair in sortedPhrases:
             try:
                 if boundPair[0] <= collapsedBounds[-1][1]:
                     if boundPair[1] > collapsedBounds[-1][1]:
                         collapsedBounds[-1] = (collapsedBounds[-1][0], boundPair[1],)
                 else:
                     collapsedBounds.append(boundPair)
+
             except IndexError:
                 # Throws an index error for the first boundPair - as collpasedBounds[-1] doesn't exist
                 collapsedBounds.append(boundPair)
-            
+        
         return collapsedBounds
                 
     
