@@ -58,3 +58,12 @@ class base_tree_parser(unittest.TestCase):
         # P2 should nobe collapsed
         self.assertEqual(cBounds['P2'], [(1,4), (100, 127)])
         
+        
+class chunk_parser_tests(unittest.TestCase):
+    
+    def setUp(self):
+        pass
+    
+    
+    def tearDown(self):
+        pass

@@ -20,23 +20,6 @@ class ChunkParser(nltk.ChunkParserI, BaseParser):
     	
     	return tagged_pos_tags
     	
-    	chunktags = [chunktag for (pos, chunktag) in tagged_pos_tags]
-    	
-    	relBounds = []
-    	
-    	start = -1
-    	for i, ctag in enumerate(chunktags):
-    		if ctag == 'B-NP':
-    			start = i
-    		if start != -1 and ctag != 'I-NP' and start != i:
-    			relBounds.append([start, i-1])
-    			start = -1
-    	
-    	if start != -1:
-    		relBounds.append([start, len(chunktags)-1]) # if the last phrase in a NP - append it
-    	
-    	return relBounds
-    	
     	
     def parseBoundaries(self, sentence, phrase_type = ['NP']):
         """Method to parse a sentence and return the boundaries of a given 
@@ -78,6 +61,3 @@ class ChunkParser(nltk.ChunkParserI, BaseParser):
         _close_open_phrases()
         
         return bounds
-    
-    
-    
