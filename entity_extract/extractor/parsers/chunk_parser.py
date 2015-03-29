@@ -21,7 +21,7 @@ class ChunkParser(nltk.ChunkParserI, BaseParser):
     	return tagged_pos_tags
     	
     	
-    def parseBoundaries(self, sentence, phrase_type = ['NP']):
+    def parseBoundaries(self, sentence, phrase_type = []):
         """Method to parse a sentence and return the boundaries of a given 
            tag type - such as relationalPhrases """
         
@@ -31,33 +31,42 @@ class ChunkParser(nltk.ChunkParserI, BaseParser):
         parsed_sent = self.parse(sentence)
         chunktags = [chunktag for (pos, chunktag) in parsed_sent]
         
-        parseState = {p : False for p in phrase_type}
+        parseState = {p : None for p in phrase_type}
         bounds = {p:[] for p in phrase_type}
         
         
-        def _close_open_phrases():
+        def _close_open_phrases(curIndex):
             """ Closes any open phrases in a parseState object """
             for phrase, start in parseState.iteritems():
-                if start:
-                    bounds[phrase].append((start, i))
-                    parseState[phrase] = False
+                if start != None:
+                    try:
+                        bounds[phrase].append((start, curIndex))
+                    except KeyError:
+                        bounds[phrase] = [(start, curIndex,)]
+                        
+                    parseState[phrase] = None
         
         
         for i, cTag in enumerate(chunktags):
+            
             if cTag[0] == 'B':
+                
                 # We're going to begin a tag - so let's store the phrase start point
-                if parseState[cTag[2:]]:
-                    bounds[cTag[2:]].append((parseState[cTag[2:]], i,))
+                if cTag[2:] in parseState and parseState[cTag[2:]] != None:
+                    try:
+                        bounds[cTag[2:]].append((parseState[cTag[2:]], i,))
+                    except KeyError:
+                        bounds[cTag[2:]] = [(parseState[cTag[2:]], i,)]
                     
                 parseState[cTag[2:]] = i
             
             elif cTag[0] == 'O':
                 # We need to close any open tags...
-                _close_open_phrases()
+                _close_open_phrases(i)
         
         
         # It's possible tags could still be in the middle - once boundary identification is done
         # So we'll run through the dict of phrases to see if any are still open
-        _close_open_phrases()
+        _close_open_phrases(len(chunktags))
         
         return bounds
