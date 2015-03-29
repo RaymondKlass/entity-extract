@@ -16,7 +16,7 @@ class ChunkParser(nltk.ChunkParserI, BaseParser):
     def parse(self, sentence):
     	pos_tags = [pos for (word, pos) in sentence]
     	tagged_pos_tags = self.tagger.tag(pos_tags)
-    
+    	print tagged_pos_tags
     	chunktags = [chunktag for (pos, chunktag) in tagged_pos_tags]
     	
     	relBounds = []
@@ -33,3 +33,7 @@ class ChunkParser(nltk.ChunkParserI, BaseParser):
     		relBounds.append([start, len(chunktags)-1]) # if the last phrase in a NP - append it
     	
     	return relBounds
+    	
+    	
+    def parseBoundaries(self, sentence, phrase_type):
+        pass

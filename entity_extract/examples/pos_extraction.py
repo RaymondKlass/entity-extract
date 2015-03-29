@@ -17,7 +17,7 @@ sents = sentSplitter.split('The big orange tiger ran across the green grass fiel
 for sent in sents:
     tokens = tokenizer.tokenize(sent)
     tags = tagger.tag(tokens)
-    #chunks = chunker.parse(tags)
-    #print chunks
-    print grammerParse.parse(tags)
-    print grammerParse.parseBoundaries(tags, ['RelPhrase'])
+    chunks = chunker.parse(tags)
+    print chunks
+    #print grammerParse.parse(tags)
+    #print grammerParse.parseBoundaries(tags, ['RelPhrase'])
