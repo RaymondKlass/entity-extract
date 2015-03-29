@@ -69,8 +69,8 @@ class chunk_parser_tests(unittest.TestCase):
     def tearDown(self):
         pass
     
-
-    def test_parse_boundaries(self):
+    @mock.patch('entity_extract.extractor.parsers.chunk_parser.ChunkParser.parse')
+    def test_parse_boundaries(self, mock_parse):
         pass
     
     
