@@ -1,6 +1,6 @@
 import unittest
 import mock
-from entity_extract.extractor.parsers import base_parser
+from entity_extract.extractor.parsers import base_parser, ChunkParser
 
 from nltk.tree import *
 
@@ -62,8 +62,15 @@ class base_tree_parser(unittest.TestCase):
 class chunk_parser_tests(unittest.TestCase):
     
     def setUp(self):
-        pass
+        self.chunkParser = ChunkParser
+        self.parsedSent = [('JJ', u'B-NP'), ('NNP', u'I-NP'), ('VBD', u'O'), ('DT', u'B-NP'), ('NNP', u'I-NP'), ('NNP', u'I-NP'), ('NN', u'I-NP'), ('IN', u'O'), ('NN', u'B-NP'), ('.', u'O')]
     
     
     def tearDown(self):
         pass
+    
+
+    def test_parse_boundaries(self):
+        pass
+    
+    

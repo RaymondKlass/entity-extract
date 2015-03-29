@@ -19,6 +19,6 @@ for sent in sents:
     tags = tagger.tag(tokens)
     chunks = chunker.parse(tags)
     print chunker.parseBoundaries(tags)
-    #print chunks
+    print chunks
     #print grammerParse.parse(tags)
     #print grammerParse.parseBoundaries(tags, ['RelPhrase'])
