@@ -1,4 +1,5 @@
 import nltk
+import types
 from nltk.corpus import conll2000
 from nltk.chunk.util import conlltags2tree
 from entity_extract.extractor.parsers.base_parser import BaseParser		
@@ -16,7 +17,9 @@ class ChunkParser(nltk.ChunkParserI, BaseParser):
     def parse(self, sentence):
     	pos_tags = [pos for (word, pos) in sentence]
     	tagged_pos_tags = self.tagger.tag(pos_tags)
-    	print tagged_pos_tags
+    	
+    	return tagged_pos_tags
+    	
     	chunktags = [chunktag for (pos, chunktag) in tagged_pos_tags]
     	
     	relBounds = []
@@ -35,5 +38,46 @@ class ChunkParser(nltk.ChunkParserI, BaseParser):
     	return relBounds
     	
     	
-    def parseBoundaries(self, sentence, phrase_type):
-        pass
+    def parseBoundaries(self, sentence, phrase_type = ['NP']):
+        """Method to parse a sentence and return the boundaries of a given 
+           tag type - such as relationalPhrases """
+        
+        if isinstance(phrase_type, types.StringTypes):
+            phrase_type = [phrase_type]
+            
+        parsed_sent = self.parse(sentence)
+        chunktags = [chunktag for (pos, chunktag) in parsed_sent]
+        
+        parseState = {p : False for p in phrase_type}
+        bounds = {p:[] for p in phrase_type}
+        
+        
+        def _close_open_phrases():
+            """ Closes any open phrases in a parseState object """
+            for phrase, start in parseState.iteritems():
+                if start:
+                    bounds[phrase].append((start, i))
+                    parseState[phrase] = False
+        
+        
+        for i, cTag in enumerate(chunktags):
+            if cTag[0] == 'B':
+                # We're going to begin a tag - so let's store the phrase start point
+                if parseState[cTag[2:]]:
+                    bounds[cTag[2:]].append((parseState[cTag[2:]], i,))
+                    
+                parseState[cTag[2:]] = i
+            
+            elif cTag[0] == 'O':
+                # We need to close any open tags...
+                _close_open_phrases()
+        
+        
+        # It's possible tags could still be in the middle - once boundary identification is done
+        # So we'll run through the dict of phrases to see if any are still open
+        _close_open_phrases()
+        
+        return bounds
+    
+    
+    
