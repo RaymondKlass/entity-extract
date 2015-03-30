@@ -95,5 +95,3 @@ class chunk_parser_tests(unittest.TestCase):
         bounds = {'NP' : [(0,2), (2,7), (8,9)]}
         cBounds = self.chunkParser.collapseBoundaries(bounds)
         self.assertEqual(cBounds, {'NP' : [(0,7), (8,9)]})
-    
-    
