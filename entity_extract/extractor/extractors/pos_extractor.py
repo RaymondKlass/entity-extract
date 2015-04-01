@@ -23,19 +23,20 @@ class PosRelationExtractor(object):
         relations = []
         temp_rel = []
         
+        
         for phrase in all_bounds:
             if phrase[2] == 'NP':
                 # This phrase could either be a start or an end - or both
                 try:
                     if temp_rel[-1][2] == 'REL':
-                        temp_rel[-1].append(phrase)
-                        relations.append(phrase)
+                        temp_rel.append(phrase)
+                        relations.append(temp_rel)
                         temp_rel = [phrase]
                     
                     elif temp_rel[-1][2] == 'NP':
                         temp_rel[-1] = phrase
                 
-                except KeyError:
+                except IndexError:
                     temp_rel = [phrase]
             
             elif phrase[2] == 'REL':
@@ -45,7 +46,7 @@ class PosRelationExtractor(object):
                     elif temp_rel[-1][2] == 'REL':
                         # Two in a row is not valid, so we should reset the temp var
                         temp_rel = []
-                except KeyError:
+                except IndexError:
                     # Only occurs if this is the first phrase trying to be pushed on - which is not valid
                     pass
         
