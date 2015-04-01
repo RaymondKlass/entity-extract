@@ -13,7 +13,7 @@ class PosRelationExtractor(object):
         """
         
         all_bounds = [(b[0], b[1], 'NP', token_sent[b[0]:b[1]]) for b in np_bounds]
-        all_bounds += [(b[0], b[1], 'REL' token_sent[b[0]: b[1]]) for b in rel_bounds]
+        all_bounds += [(b[0], b[1], 'REL', token_sent[b[0]: b[1]]) for b in rel_bounds]
         
         all_bounds = sorted(all_bounds, key = lambda x: x[0])
         

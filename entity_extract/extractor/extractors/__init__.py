@@ -1,1 +1,1 @@
-from pos_extractor import PosExtractor
+from pos_extractor import PosRelationExtractor
