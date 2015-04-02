@@ -38,6 +38,4 @@ while True:
         print ' '.join(relation[0][3]) + ' -> ' + ' '.join(relation[1][3]) + ' -> ' + ' '.join(relation[2][3])
     
     if not len(extract):
-        print 'No Relationships Found'    
-    
-    
+        print 'No Relationships Found'
