@@ -20,4 +20,10 @@ class pos_extractor_test(unittest.TestCase):
         """ Test the part of speech based relation extractor """
         
         extraction = self.posExtractor.extract(self.sentence, self.NP, self.REL)
-        self.assertEqual(extraction, [[(1, 3, 'NP', ['word 1', 'word 2']), (5, 6, 'REL', ['word 5']), (7, 9, 'NP', ['word 7', 'word 8'])]])
+        self.assertEqual(extraction, [[
+                                        (1, 3, 'NP', ['word 1', 'word 2']), 
+                                        (5, 6, 'REL', ['word 5']), 
+                                        (7, 9, 'NP', ['word 7', 'word 8'])
+                                     ]])
+        
+        
