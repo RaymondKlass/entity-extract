@@ -13,10 +13,18 @@ chunker = ChunkParser()
 grammerParse = RelationGrammerParser()
 posExtractor = PosRelationExtractor()
 
-
-
-sents = sentSplitter.split('The big orange tiger ran across the green grass field.  Sean White won the Olympic Gold metal in snowboarding.')
-for sent in sents:
+while True:
+    print 'Enter a Sentence, or press X to exit'
+    sent = raw_input()
+    
+    if sent == 'X':
+        print 'Exiting...'
+        break
+    
+    print '\n'
+    print '-------------------------'
+    print '\n'
+    
     tokens = tokenizer.tokenize(sent)
     tags = tagger.tag(tokens)
 
@@ -26,6 +34,10 @@ for sent in sents:
 
     extract = posExtractor.extract(tokens, npChunks['NP'], relParse['RelPhrase'])
     
-    print extract
+    for relation in extract:
+        print ' '.join(relation[0][3]) + ' -> ' + ' '.join(relation[1][3]) + ' -> ' + ' '.join(relation[2][3])
+    
+    if not len(extract):
+        print 'No Relationships Found'    
     
     
