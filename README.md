@@ -9,3 +9,11 @@ Unit tests are currently run with the standard Python unittest framework.  To ru
 ```
 python tests/run_tests.py
 ```
+
+Examples:
+There is an interactive sentence extractor which can be run by entering the following from the root directory:
+
+```
+python examples/pos_extraction.py
+```
+
