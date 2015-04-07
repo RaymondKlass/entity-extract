@@ -10,7 +10,8 @@ setup(name="entity-extractor",
       packages=["entity_extract"],
       install_requires=[
         "nltk", 
-        "mock >= 1.0.1"
+        "mock >= 1.0.1",
+        "wikipedia"
       ],
       url="https://github.com/RaymondKlass/entity-extract"
       )
