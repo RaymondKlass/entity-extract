@@ -11,7 +11,7 @@ setup(name="entity-extractor",
       install_requires=[
         "nltk", 
         "mock >= 1.0.1",
-        "wikipedia"
+        "mwclient"
       ],
       url="https://github.com/RaymondKlass/entity-extract"
       )
